@@ -41,6 +41,25 @@
             3, 3, 3, 3,
             2, 2, 2, 2];
 
+        // // TESTING DECK WITH 4 CARDS
+        // const deck1to11 = ["a", "b", "c", "d"];
+
+        const dealerCards = [];
+
+        const playerCards = [];
+
+        const selectRandomIndexInDeck = deck => {
+            // Selects a number from 0 to the length of the array - 1, an array with length 40 would have a range of 0 to 39, corresponding with the possible indexes of each item in the array
+            const cardNumber = Math.floor(Math.random() * (deck.length));
+            return cardNumber;
+        };
+
+        const dealCards = () => {
+            for(let i = 0; i < 3; i++){
+                console.log(i);
+            };
+        };
+
         
         
 
