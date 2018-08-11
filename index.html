@@ -11,7 +11,7 @@
     <p>Reload the page to play again</p>
 
     <script>
-        
+        //// NOTE: Most casinos play with 6-decks shuffled together
         //// DECK -- REAL
         // const deck = [
         //     "A", "A", "A", "A", 
@@ -56,18 +56,16 @@
 
         const dealCards = deck => {
             for(let i = 0; i < 3; i++){
-                console.log(`Iteration number ${i}`);
                 
-                const dealThisCard = selectRandomIndexInDeck(deck)
-                console.log(`Card Index ${dealThisCard}`);
-                
-                dealerCards.push(deck.splice(dealThisCard, 1).pop());
+                dealerCards.push(deck.splice(selectRandomIndexInDeck(deck), 1).pop());
+                playerCards.push(deck.splice(selectRandomIndexInDeck(deck), 1).pop());
                 /* 
                 Removes 1 card from deck and adds it to the dealerCards array
+                Removes 1 card from deck and adds it to the playerCards array
 
-                "deck.splice(dealThisCard, 1)" creates an array of length 1
+                "deck.splice(selectRandomIndexInDeck(deck), 1)" creates an array of length 1
 
-                .pop() removes the last item from than new array and returns it to be pushed to the dealerCards array
+                .pop() removes the last item from than new array and returns it to be pushed to the target array
                 
                 Example: if splicing a card with value 5 from deck to an empty dealerCards array
                 dealerCards[] becomes dealercCards[5]
@@ -78,6 +76,55 @@
                 */
             };
         };
+
+        dealCards(deck1to11);
+
+        // Add up the numbers in a given array
+
+        const dealerTotal = dealerCards.reduce((total, cardValue) => total + cardValue);
+        const playerTotal = playerCards.reduce((total, cardValue) => total + cardValue);
+
+        const isBust = handTotal => {
+            if(handTotal > 21) {
+                return true;
+            }
+            else {
+                return false;
+            };
+        };
+
+        const determineWinner = (dealerTotal, playerTotal) => {
+            if(isBust(playerTotal)){
+                return "YOU LOSE -- PLAYER BUST";                
+            }
+            else if(isBust(dealerTotal)) {
+                return "YOU WIN -- DEALER BUST";
+            }
+            else {
+                if(playerTotal === dealerTotal) {
+                    return "PUSH"
+                }
+                else if(playerTotal > dealerTotal) {
+                    return "YOU WIN -- DEALER LOWER";
+                }
+                else {
+                    return "YOU LOSE -- DEALER HIGHER";
+                };
+            };
+        };
+
+        console.log(`Dealer Cards: ${dealerCards}`);
+        console.log(`Dealer Total: ${dealerTotal}`);
+        console.log(`Bust? ${isBust(dealerTotal)}`);        
+        console.log('');
+        
+        console.log(`Player Cards: ${playerCards}`);
+        console.log(`Player Total: ${playerTotal}`);
+        console.log(`Bust? ${isBust(playerTotal)}`);
+        console.log('');
+        
+        console.log(determineWinner(dealerTotal, playerTotal));
+        
 
         
         
