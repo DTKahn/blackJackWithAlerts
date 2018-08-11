@@ -61,15 +61,19 @@
                 const dealThisCard = selectRandomIndexInDeck(deck)
                 console.log(`Card Index ${dealThisCard}`);
                 
-                dealerCards.push(deck.splice(dealThisCard, 1));
+                dealerCards.push(deck.splice(dealThisCard, 1).pop());
                 /* 
-                Removes 1 card from deck and adds it as an array with a length of 1 to the dealerCards array
+                Removes 1 card from deck and adds it to the dealerCards array
+
+                "deck.splice(dealThisCard, 1)" creates an array of length 1
+
+                .pop() removes the last item from than new array and returns it to be pushed to the dealerCards array
                 
                 Example: if splicing a card with value 5 from deck to an empty dealerCards array
-                dealerCards[] becomes dealercCards[[5]]
+                dealerCards[] becomes dealercCards[5]
                 
-                Example: if splicing a card with value 8 from deck to dealerCards array of dealerCards[[5]]
-                dealerCards[[5]] becomes dealercCards[[5],[8]]
+                Example: if splicing a card with value 8 from deck to dealerCards array of dealerCards[5]
+                dealerCards[5] becomes dealercCards[5, 8]
 
                 */
             };
